@@ -333,6 +333,7 @@ testMinifyModule = describe "Minify modules:" $ do
         minifyModule " export const a = 1 ; " `shouldBe` "export const a=1"
         minifyModule " export function f () {  } ; " `shouldBe` "export function f(){}"
         minifyModule " export function * f () {  } ; " `shouldBe` "export function*f(){}"
+        minifyModule " export * from \"mod\" ; " `shouldBe` "export*from\"mod\""
 
 -- -----------------------------------------------------------------------------
 -- Minify test helpers.
