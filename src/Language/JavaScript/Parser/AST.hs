@@ -212,7 +212,7 @@ data JSExpression
 data JSConciseBody
     = JSConciseFunctionBody !JSBlock
     | JSConciseExpressionBody !JSExpression
-    deriving (Data, Eq, Show, Typeable)
+    deriving (Data, Eq, Generic, NFData, Show, Typeable)
 
 data JSArrowParameterList
     = JSUnparenthesizedArrowParameter !JSIdent
