@@ -9,3 +9,5 @@ Differences from the new-ast branch:
   See: https://github.com/erikd/language-javascript/pull/117
 * Merged `derive-generic-and-nfdata` branch.
   See: https://github.com/erikd/language-javascript/pull/122
+* Merged `export-star-rebased` branch.
+  See: https://github.com/erikd/language-javascript/pull/125
