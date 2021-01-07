@@ -4,7 +4,6 @@
 module Language.JavaScript.Parser.AST
     ( JSExpression (..)
     , JSAnnot (..)
-    , JSConciseBody(..)
     , JSBinOp (..)
     , JSUnaryOp (..)
     , JSSemi (..)
@@ -192,7 +191,7 @@ data JSExpression
     | JSExpressionParen !JSAnnot !JSExpression !JSAnnot -- ^lb,expression,rb
     | JSExpressionPostfix !JSExpression !JSUnaryOp -- ^expression, operator
     | JSExpressionTernary !JSExpression !JSAnnot !JSExpression !JSAnnot !JSExpression -- ^cond, ?, trueval, :, falseval
-    | JSArrowExpression !JSArrowParameterList !JSAnnot !JSConciseBody -- ^parameter list,arrow,body`
+    | JSArrowExpression !JSArrowParameterList !JSAnnot !JSStatement -- ^parameter list,arrow,block`
     | JSFunctionExpression !JSAnnot !JSIdent !JSAnnot !(JSCommaList JSExpression) !JSAnnot !JSBlock -- ^fn,name,lb, parameter list,rb,block`
     | JSGeneratorExpression !JSAnnot !JSAnnot !JSIdent !JSAnnot !(JSCommaList JSExpression) !JSAnnot !JSBlock -- ^fn,*,name,lb, parameter list,rb,block`
     | JSMemberDot !JSExpression !JSAnnot !JSExpression -- ^firstpart, dot, name
@@ -209,10 +208,10 @@ data JSExpression
     | JSYieldFromExpression !JSAnnot !JSAnnot !JSExpression -- ^yield, *, expr
     deriving (Data, Eq, Generic, NFData, Show, Typeable)
 
-data JSConciseBody
-    = JSConciseFunctionBody !JSBlock
-    | JSConciseExpressionBody !JSExpression
-    deriving (Data, Eq, Generic, NFData, Show, Typeable)
+-- data JSConciseBody
+--     = JSConciseFunctionBody !JSBlock
+--     | JSConciseExpressionBody !JSExpression
+--     deriving (Data, Eq, Generic, NFData, Show, Typeable)
 
 data JSArrowParameterList
     = JSUnparenthesizedArrowParameter !JSIdent
@@ -464,10 +463,6 @@ instance ShowStripped JSExpression where
 instance ShowStripped JSArrowParameterList where
     ss (JSUnparenthesizedArrowParameter x) = ss x
     ss (JSParenthesizedArrowParameterList _ xs _) = ss xs
-
-instance ShowStripped JSConciseBody where
-    ss (JSConciseFunctionBody b) = ss b
-    ss (JSConciseExpressionBody e) = ss e
 
 instance ShowStripped JSModuleItem where
     ss (JSModuleExportDeclaration _ x1) = "JSModuleExportDeclaration (" ++ ss x1 ++ ")"
