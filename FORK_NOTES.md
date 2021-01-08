@@ -12,3 +12,4 @@ Differences from the new-ast branch:
 * Merged `export-star-rebased` branch.
   See: https://github.com/erikd/language-javascript/pull/125
 * Reverted the main commit of `fix-arrow-function-body-parsing`
+* Un-reverted the main commit of `fix-arrow-function-body-parsing`
